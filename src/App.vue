@@ -45,7 +45,9 @@
       </v-btn>
     </v-toolbar>
     <v-content>
-      <HelloWorld/>
+      <v-fade-transition mode="out-in">
+        <router-view></router-view>
+      </v-fade-transition>
     </v-content>
     <v-navigation-drawer
       temporary
@@ -82,9 +84,7 @@ export default {
       clipped: false,
       drawer: true,
       fixed: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
+      items: [{ icon: 'bubble_chart', title: 'Inspire'
       }],
       miniVariant: false,
       right: true,
