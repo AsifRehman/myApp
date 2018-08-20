@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Partytypes from './views/PartyTypes.vue'
+import PartyCategs from './views/PartyCategs.vue'
 
 Vue.use(Router)
 
@@ -11,6 +12,7 @@ export default new Router({
   routes: [
     { path: '/', name: 'home', component: Home},
     { path: '/partytypes', component: Partytypes},
+    { path: '/partyCategs', component: PartyCategs},
     { path: '/about', name: 'about',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
