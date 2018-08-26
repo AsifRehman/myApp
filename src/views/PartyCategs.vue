@@ -2,11 +2,8 @@
   <div>
     <v-toolbar flat color="white">
       <v-toolbar-title>Party Categories</v-toolbar-title>
-      <v-divider
-        class="mx-2"
-        inset
-        vertical
-      ></v-divider>
+      <v-divider class="mx-2" inset vertical></v-divider>
+      <v-btn color="success" dark class="mb-2" @click="post">Save</v-btn>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
         <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
@@ -36,22 +33,13 @@
         </v-card>
       </v-dialog>
     </v-toolbar>
-    <v-data-table
-      :headers="headers"
-      :items="mainList"
-      hide-actions
-      class="elevation-1"
-    >
+    <v-data-table :headers="headers" :items="mainList" hide-actions class="elevation-1">
       <template slot="items" slot-scope="props">
         <td>{{ props.item.id }}</td>
         <td class="text-xs-centre">{{ props.item.PartyCateg }}</td>
         <td class="justify-center layout px-0">
-          <v-icon small class="mr-2" @click="editItem(props.item)">
-            edit
-          </v-icon>
-          <v-icon small @click="deleteItem(props.item)">
-            delete
-          </v-icon>
+          <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
+          <v-icon small @click="deleteItem(props.item)">delete</v-icon>
         </td>
       </template>
       <template slot="no-data">
@@ -66,11 +54,12 @@ import axios from 'axios';
   export default {
     data: () => ({
       dialog: false,
+      url: 'http://localhost/odata/tbl_PartyCateg/',
       headers: [
         {
           text: 'PartyCategID',
           align: 'left',
-          sortable: false,
+          sortable: true,
           value: 'id'
         },
         { text: 'PartyCateg', value: 'PartyCateg' }
@@ -103,8 +92,8 @@ import axios from 'axios';
 
     methods: {
       initialize () {
-          var vm = this;
-        axios.get('http://localhost/odata/tbl_PartyCateg/', { "content-type": "application/json"})
+        var vm = this;
+        axios.get( this.url, { "content-type": "application/json"})
         .then(function(response){
             vm.mainList = response.data.value;
         })
@@ -112,7 +101,16 @@ import axios from 'axios';
             console.log(error);
         })
       },
-
+      post () {
+        var vm = this;
+        axios.post( this.url, mainList)
+        .then(function(response){
+            vm.mainList = response.data.value;
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+      },
       editItem (item) {
         this.editedIndex = this.mainList.indexOf(item)
         this.editedItem = Object.assign({}, item)
