@@ -11,8 +11,8 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     { path: '/', name: 'home', component: Home},
-    { path: '/partytypes', component: Partytypes},
-    { path: '/partyCategs', component: PartyCategs},
+    { path: '/partytypes', name: 'partytypes', component: Partytypes},
+    { path: '/partycategs', name: 'partycategs', component: PartyCategs},
     { path: '/about', name: 'about',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route

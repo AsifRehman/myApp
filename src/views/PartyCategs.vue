@@ -54,7 +54,7 @@ import axios from 'axios';
   export default {
     data: () => ({
       dialog: false,
-      url: 'http://localhost/odata/tbl_PartyCateg/',
+      url: '',
       headers: [
         {
           text: 'PartyCategID',
@@ -92,22 +92,25 @@ import axios from 'axios';
 
     methods: {
       initialize () {
+        this.url = this.$store.state.url + 'tbl_PartyCateg';
         var vm = this;
         axios.get( this.url, { "content-type": "application/json"})
         .then(function(response){
             vm.mainList = response.data.value;
         })
         .catch(function(error){
-            console.log(error);
+          // eslint-disable-next-line
+          Console.log(error);
         })
       },
       post () {
         var vm = this;
-        axios.post( this.url, mainList)
+        axios.post( this.url, vm.mainList)
         .then(function(response){
             vm.mainList = response.data.value;
         })
         .catch(function(error){
+            // eslint-disable-next-line
             console.log(error);
         })
       },

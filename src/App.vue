@@ -1,29 +1,77 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      persistent
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      enable-resize-watcher
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-tile
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
-        >
-          <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
+
+<v-navigation-drawer
+    stateless
+    value="true"
+    persistent
+    :mini-variant="miniVariant"
+    :clipped="clipped"
+    v-model="drawer"
+    enable-resize-watcher
+    fixed
+    app
+  >
+    <v-list>
+      <v-list-tile>
+        <v-list-tile-action>
+          <v-icon>home</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-title>Home</v-list-tile-title>
+      </v-list-tile>
+
+      <v-list-group
+        prepend-icon="account_circle"
+        value="true"
+      >
+        <v-list-tile slot="activator">
+          <v-list-tile-title>Users</v-list-tile-title>
         </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
+
+        <v-list-group
+          no-action
+          sub-group
+          value="true"
+        >
+          <v-list-tile slot="activator">
+            <v-list-tile-title>Admin</v-list-tile-title>
+          </v-list-tile>
+
+          <v-list-tile
+            v-for="(admin, i) in admins"
+            :key="i"
+            @click="LoadPage(admin)"
+          >
+            <v-list-tile-title v-text="admin[0]"></v-list-tile-title>
+            <v-list-tile-action>
+              <v-icon v-text="admin[1]"></v-icon>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list-group>
+
+        <v-list-group
+          sub-group
+          no-action
+        >
+          <v-list-tile slot="activator">
+            <v-list-tile-title>Actions</v-list-tile-title>
+          </v-list-tile>
+
+          <v-list-tile
+            v-for="(crud, i) in cruds"
+            :key="i"
+            @click="LoadPage(crud)"
+          >
+            <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
+            <v-list-tile-action>
+              <v-icon v-text="crud[1]"></v-icon>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list-group>
+      </v-list-group>
+    </v-list>
+  </v-navigation-drawer>
+
     <v-toolbar
       app
       :clipped-left="clipped"
@@ -49,22 +97,6 @@
         <router-view></router-view>
       </v-fade-transition>
     </v-content>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-tile @click="right = !right">
-          <v-list-tile-action>
-            <v-icon>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
     <v-footer :fixed="fixed" app>
       <span>&copy; 2017</span>
     </v-footer>
@@ -84,12 +116,27 @@ export default {
       clipped: false,
       drawer: true,
       fixed: false,
-      items: [{ icon: 'bubble_chart', title: 'Inspire'
-      }],
+      admins: [
+        ['PartyCateg', 'people_outline'],
+        ['PartyType', 'settings']
+      ],
+      cruds: [
+        ['PartyCateg', 'add'],
+        ['Read', 'insert_drive_file'],
+        ['Update', 'update'],
+        ['Delete', 'delete']
+      ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js'
+    }
+  },
+  methods: {
+    LoadPage(data) {
+      //console.log(data[0]);
+      this.$router.push(data[0]);
+      //console.log(this.$router);
     }
   }
 }
