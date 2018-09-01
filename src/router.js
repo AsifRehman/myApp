@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Partytypes from './views/PartyTypes.vue'
-import PartyCategs from './views/PartyCategs.vue'
+
+// accounts
+import Partytypes from './views/accounts/partytypes/PartyTypes.vue'
+import PartyCategs from './views/accounts/partycategs/PartyCategs.vue'
+
+
 
 Vue.use(Router)
 
@@ -17,7 +21,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/About/About.vue')
     }
   ]
 })
