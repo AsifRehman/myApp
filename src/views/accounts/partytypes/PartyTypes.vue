@@ -13,9 +13,9 @@
         </v-btn>
       </v-toolbar>
       <v-card-text>
-        <v-text-field v-model="PartyTypeID" :disabled="!isEditing" color="white" label="PartyType ID"></v-text-field>
-        <v-text-field v-model="PartyType" :disabled="!isEditing" color="white" label="PartyType"></v-text-field>
-        <v-autocomplete v-model="PartyCategID" :disabled="!isEditing" :items="Categories" :filter="customFilter" color="white" item-text="name" label="Party Catgory"></v-autocomplete>
+        <v-text-field v-model="masterEntry.PartyTypeID" :disabled="!isEditing" color="white" label="PartyType ID"></v-text-field>
+        <v-text-field v-model="masterEntry.PartyType" :disabled="!isEditing" color="white" label="PartyType"></v-text-field>
+        <v-autocomplete v-model="masterEntry.PartyCategID" :disabled="!isEditing" :items="Categories" :filter="customFilter" color="white" item-text="name" label="Party Catgory"></v-autocomplete>
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
@@ -24,7 +24,7 @@
       </v-card-actions>
       <v-snackbar v-model="hasSaved" :timeout="2000" absolute bottom left>Your profile has been updated</v-snackbar>
     </v-card>
-    <v-data-table :headers="headers" :items="PartyTypes" class="elevation-1">
+    <v-data-table :headers="headers" :items="master" class="elevation-1">
       <template slot="items" slot-scope="props">
         <td>{{ props.item.id }}</td>
         <td class="text-xs-left">{{ props.item.PartyType }}</td>
@@ -51,10 +51,8 @@ import axios from 'axios'
           { text: 'UPartyType', value: 'Upartytype' },
           { text: 'PartyCategID', value: 'PartyCategID' }
         ],
-        PartyTypes: [],
-        PartyTypeID: null,
-        PartyType: '',
-        PartyCategID: null,
+        master:[],
+        masterEntry: { PartyTypeID: null, PartyType: '', PartyCategID: null },
         url: this.$store.state.url,
         localUrl: this.$store.state.url + 'tbl_PartyType',
         hasSaved: false,
@@ -81,12 +79,13 @@ import axios from 'axios'
       },
       save () {
         this.isEditing = !this.isEditing
-        axios.post(this.localUrl , {"id": this.PartyTypeID, "PartyType": this.PartyType, "PartyCategID": this.PartyCategID})
+        console.log(this.master);
+        axios.post(this.localUrl , this.masterEntry)
         .then(function(response){
           console.log(response);
         })
         .catch(function (error){
-          console.log(error);
+          //console.log(error);
         });
         this.hasSaved = true
       },
@@ -99,7 +98,7 @@ import axios from 'axios'
         var vm = this;
         axios.get(this.localUrl , {"content-type" : "application/json"})
         .then(function(response){
-          vm.PartyTypes = response.data.value;
+          vm.master = response.data.value;
           console.log(response.data.value);
         })
         .catch(function(error){
