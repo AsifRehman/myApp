@@ -1,11 +1,21 @@
 <template>
   <v-app>
-    <v-alert type="accent" :value="true" >
+    <v-alert :value="true" >
       {{title}}
     </v-alert>
-    <v-toolbar color="accent">
-
+    <v-toolbar>
+      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-toolbar-title>Title</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat to="/partycategs">Party Categories</v-btn>
+        <v-btn flat to="/partytypes">Party Types</v-btn>
+        <v-btn flat>Link Three</v-btn>
+      </v-toolbar-items>
     </v-toolbar>
+    <v-fade-transition mode="out-in">
+      <router-view></router-view>
+    </v-fade-transition>
   </v-app>
 </template>
 

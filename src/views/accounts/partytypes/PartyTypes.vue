@@ -55,7 +55,8 @@ import axios from 'axios'
         PartyTypeID: null,
         PartyType: '',
         PartyCategID: null,
-        url: 'http://localhost/odata/tbl_PartyType',
+        url: this.$store.state.url,
+        localUrl: this.$store.state.url + 'tbl_PartyType',
         hasSaved: false,
         isEditing: true,
         model: null,
@@ -80,7 +81,7 @@ import axios from 'axios'
       },
       save () {
         this.isEditing = !this.isEditing
-        axios.post(this.url, {"id": this.PartyTypeID, "PartyType": this.PartyType, "PartyCategID": this.PartyCategID})
+        axios.post(this.localUrl , {"id": this.PartyTypeID, "PartyType": this.PartyType, "PartyCategID": this.PartyCategID})
         .then(function(response){
           console.log(response);
         })
@@ -96,10 +97,10 @@ import axios from 'axios'
       get () {
         console.log('get');
         var vm = this;
-        axios.get(this.url, {"content-type" : "application/json"})
+        axios.get(this.localUrl , {"content-type" : "application/json"})
         .then(function(response){
           vm.PartyTypes = response.data.value;
-          //console.log(response.data.value);
+          console.log(response.data.value);
         })
         .catch(function(error){
           console.log(error);
