@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    url: 'http://localhost:81/odata/'
+    url: 'https://brtapi.azurewebsites.net/odata/'
   },
   mutations: {
 
