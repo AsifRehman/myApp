@@ -16,10 +16,13 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.id" label="PartyCateg ID"></v-text-field>
+                  <v-text-field v-model="editedItem.PartyCategID" label="PartyCateg ID"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.PartyCateg" label="PartyCateg"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.HeadID" label="Head ID"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -35,8 +38,9 @@
     </v-toolbar>
     <v-data-table :headers="headers" :items="mainList" hide-actions class="elevation-1">
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.id }}</td>
+        <td>{{ props.item.PartyCategID }}</td>
         <td class="text-xs-centre">{{ props.item.PartyCateg }}</td>
+        <td class="text-xs-centre">{{ props.item.HeadID }}</td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
           <v-icon small @click="deleteItem(props.item)">delete</v-icon>
@@ -60,17 +64,20 @@ import axios from 'axios';
           text: 'PartyCategID',
           align: 'left',
           sortable: true,
-          value: 'id'
+          value: 'PartyCategID'
         },
-        { text: 'PartyCateg', value: 'PartyCateg' }
+        { text: 'PartyCateg', value: 'PartyCateg' },
+        { text: 'HeadID', value: 'HeadID' }
       ],
       mainList: [],
       editedIndex: -1,
       editedItem: {
-        PartyCateg: ''
+        PartyCateg: '',
+        HeadID: ''
       },
       defaultItem: {
         PartyCateg: '',
+        HeadID: '',
       }
     }),
 
