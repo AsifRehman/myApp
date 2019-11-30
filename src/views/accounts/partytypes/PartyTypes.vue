@@ -69,39 +69,39 @@ import axios from 'axios'
     },
 
     methods: {
-      customFilter (item, queryText, itemText) {
-        const textOne = item.name.toLowerCase()
-        const textTwo = item.abbr.toLowerCase()
-        const searchText = queryText.toLowerCase()
 
-        return textOne.indexOf(searchText) > -1 ||
-          textTwo.indexOf(searchText) > -1
-      },
       save () {
         this.isEditing = !this.isEditing
+        // eslint-disable-next-line
         console.log(this.master);
         axios.post(this.localUrl , this.masterEntry)
         .then(function(response){
+          // eslint-disable-next-line
           console.log(response);
         })
         .catch(function (error){
-          //console.log(error);
+          // eslint-disable-next-line
+          console.log(error);
         });
         this.hasSaved = true
       },
       mounted() {
         this.get();
+        // eslint-disable-next-line
         console.log('xyz');
       },
       get () {
+        // eslint-disable-next-line
         console.log('get');
         var vm = this;
         axios.get(this.localUrl , {"content-type" : "application/json"})
         .then(function(response){
           vm.master = response.data.value;
+          // eslint-disable-next-line
           console.log(response.data.value);
         })
         .catch(function(error){
+          // eslint-disable-next-line
           console.log(error);
         });
       }
