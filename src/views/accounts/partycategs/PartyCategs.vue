@@ -38,9 +38,8 @@
     </v-toolbar>
     <v-data-table :headers="headers" :items="mainList" hide-actions class="elevation-1">
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.PartyCategID }}</td>
+        <td>{{ props.item.id }}</td>
         <td class="text-xs-centre">{{ props.item.PartyCateg }}</td>
-        <td class="text-xs-centre">{{ props.item.HeadID }}</td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
           <v-icon small @click="deleteItem(props.item)">delete</v-icon>
@@ -103,6 +102,7 @@ import axios from 'axios';
         var vm = this;
         axios.get( this.url, { "content-type": "application/json"})
         .then(function(response){
+          debugger
             vm.mainList = response.data.value;
         })
         .catch(function(error){
