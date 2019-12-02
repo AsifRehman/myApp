@@ -10,8 +10,8 @@
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat to="/mhead">1st Level</v-btn>
         <v-btn flat to="/head">2nd Level</v-btn>
-        <v-btn flat to="/partycategs">Party Categories</v-btn>
-        <v-btn flat to="/partytypes">Party Types</v-btn>
+        <v-btn flat to="/partycategs">3rd Level</v-btn>
+        <v-btn flat to="/partytypes">4th Level</v-btn>
         <v-btn flat to="/cr">CR</v-btn>
         <v-btn flat to="/cp">CP</v-btn>
         <v-btn flat to="/jv">JV</v-btn>
