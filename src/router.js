@@ -12,6 +12,8 @@ import CashReceipt from './views/transactions/CashReceipt/cr.vue'
 import CashPayment from './views/transactions/CashPayment/cp.vue'
 import GeneralJounral from './views/transactions/JV/jv.vue'
 
+import Test1 from './views/About/Test1.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +29,8 @@ export default new Router({
     { path: '/cr', name: 'cr', component: CashReceipt},
     { path: '/cp', name: 'cp', component: CashPayment},
     { path: '/jv', name: 'jv', component: GeneralJounral},
+
+    { path: '/test1', name: 'test1', component: Test1},
 
     { path: '/about', name: 'about',
       // route level code-splitting

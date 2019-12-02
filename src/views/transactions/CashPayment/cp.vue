@@ -67,7 +67,7 @@ export default {
       this.editedItem.MHead = "";
     },
     Add() {
-      debugger
+      //debugger
       var vm = this;
       var item = { ...this.editedItem}
       this.Reset();

@@ -1,15 +1,39 @@
 <template>
   <div class="about">
-    <v-alert :type="alertType">
-      {{ Status }}
-    </v-alert>
+    <v-alert :type="alertType">{{ Status }}</v-alert>
+    <v-btn color="success" @click="dialog=true">New Item</v-btn>
+    <v-dialog
+      v-model="dialog"
+      scrollable
+      persistent
+      :overlay="true"
+      max-width="500px"
+      transition="dialog-transition"
+    >
+      <v-card>
+        <v-card-title class="headline grey lighten-2" primary-title>New Item</v-card-title>
 
-    <!-- New Entry -->
-    <v-text-field v-model="editedItem.MHeadID" ref="MHeadID" label="MHead ID" @keyup.enter="this.$refs.MHead.focus()"></v-text-field>
-    <v-text-field v-model="editedItem.MHead" ref="MHead" label="MHead"></v-text-field>
-    <v-btn color="success" @click="Add">Post</v-btn>
-    <h1>cash payment</h1>
-    <!-- End New Entry -->
+        <v-card-text>
+          <!-- New Entry -->
+          <v-text-field
+            v-model="editedItem.MHeadID"
+            ref="MHeadID"
+            label="MHead ID"
+            @keyup.enter="this.$refs.MHead.focus()"
+          ></v-text-field>
+          <v-text-field v-model="editedItem.MHead" ref="MHead" label="MHead"></v-text-field>
+          <!-- End New Entry -->
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="success" @click="Add">Post</v-btn>
+          <v-btn color="info" @click="dialog=false">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <!-- List -->
     <v-data-table :headers="headers" :items="mainList" hide-actions class="elevation-1">
@@ -33,18 +57,20 @@ import axios from "axios";
 export default {
   data() {
     return {
+      dialog: false,
       url: "",
-      alertType: 'success',
+      alertType: "success",
       mainList: [],
       loading: true,
       headers: [
         {
-          text: 'MHeadID',
-          align: 'left',
+          text: "MHeadID",
+          align: "left",
           sortable: true,
-          value: 'MHeadID'
+          value: "MHeadID"
         },
-        { text: 'MHead', value: 'MHead' }],
+        { text: "MHead", value: "MHead" }
+      ],
       editedItem: {
         MHeadID: "",
         MHead: ""
@@ -60,7 +86,7 @@ export default {
       this.url = this.$store.state.url + "tbl_MHead";
       var vm = this;
       axios
-        .get(this.url, { "content-type": "application/json" })
+        .get(this.url)
         .then(function(response) {
           vm.mainList = response.data.value;
           vm.loading = false;
@@ -76,10 +102,13 @@ export default {
       this.editedItem.MHeadID = null;
       this.editedItem.MHead = "";
     },
+    ShowForm() {
+      this.dialog = true;
+    },
     Add() {
       //debugger
       var vm = this;
-      var item = { ...this.editedItem}
+      var item = { ...this.editedItem };
       this.Reset();
       vm.$refs.MHeadID.focus();
 

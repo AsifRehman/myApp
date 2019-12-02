@@ -15,6 +15,7 @@
         <v-btn flat to="/cr">CR</v-btn>
         <v-btn flat to="/cp">CP</v-btn>
         <v-btn flat to="/jv">JV</v-btn>
+        <v-btn flat to="/test1">Test 1</v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <v-fade-transition mode="out-in">
