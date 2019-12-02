@@ -41,6 +41,7 @@
         <td>{{ props.item.MHeadID }}</td>
         <td class="text-xs-centre">{{ props.item.MHead }}</td>
         <td class="justify-center layout px-0">
+          <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
           <v-icon small @click="Delete(props.item)">delete</v-icon>
         </td>
       </template>
@@ -57,6 +58,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      editedIndex: -1,
       dialog: false,
       url: "",
       alertType: "success",
@@ -98,6 +100,11 @@ export default {
           vm.Status = error;
         });
     },
+    editItem(item) {
+      this.editedIndex = this.mainList.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
     Reset() {
       this.editedItem.MHeadID = null;
       this.editedItem.MHead = "";
@@ -109,13 +116,21 @@ export default {
       //debugger
       var vm = this;
       var item = { ...this.editedItem };
-      this.Reset();
-      vm.$refs.MHeadID.focus();
+      if (this.editedIndex < 0) {
+        this.Reset();
+        vm.$refs.MHeadID.focus();
 
-      axios.post(this.url, item).then(function(response) {
-        vm.Status = response.config.data;
-        vm.mainList.push(JSON.parse(response.config.data));
-      });
+        axios.post(this.url, item).then(function(response) {
+          vm.Status = response.config.data;
+          vm.mainList.push(JSON.parse(response.config.data));
+        });
+      }
+      else {
+        Object.assign(this.mainList[this.editedIndex], this.editedItem)
+        // this.editedIndex = this.mainList.indexOf(item)
+        // this.mainList = Object.assign({}, item)
+         this.dialog = false
+      }
     },
     Delete(item) {
       //debugger
