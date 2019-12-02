@@ -8,11 +8,13 @@
       <v-toolbar-title>Title</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat to="/mhead">1st Level</v-btn>
+        <v-btn flat to="/head">2nd Level</v-btn>
         <v-btn flat to="/partycategs">Party Categories</v-btn>
         <v-btn flat to="/partytypes">Party Types</v-btn>
-        <v-btn flat to="/cr">Cash Receipt</v-btn>
-        <v-btn flat to="/cp">Cash Payment</v-btn>
-        <v-btn flat to="/jv">General Journal</v-btn>
+        <v-btn flat to="/cr">CR</v-btn>
+        <v-btn flat to="/cp">CP</v-btn>
+        <v-btn flat to="/jv">JV</v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <v-fade-transition mode="out-in">
@@ -31,7 +33,7 @@ export default {
   },
   data() {
     return {
-      title: "Vuetify.js"
+      title: "BRT Systems"
     };
   },
   methods: {

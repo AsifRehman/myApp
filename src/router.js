@@ -5,6 +5,9 @@ import Home from './views/Home.vue'
 // accounts
 import Partytypes from './views/accounts/partytypes/PartyTypes.vue'
 import PartyCategs from './views/accounts/partycategs/PartyCategs.vue'
+import MHead from './views/accounts/MHead/mhead.vue'
+import Head from './views/accounts/Head/Head.vue'
+
 import CashReceipt from './views/transactions/CashReceipt/cr.vue'
 import CashPayment from './views/transactions/CashPayment/cp.vue'
 import GeneralJounral from './views/transactions/JV/jv.vue'
@@ -18,6 +21,8 @@ export default new Router({
     { path: '/', name: 'home', component: Home},
     { path: '/partytypes', name: 'partytypes', component: Partytypes},
     { path: '/partycategs', name: 'partycategs', component: PartyCategs},
+    { path: '/mhead', name: 'mhead', component: MHead},
+    { path: '/head', name: 'head', component: Head},
 
     { path: '/cr', name: 'cr', component: CashReceipt},
     { path: '/cp', name: 'cp', component: CashPayment},
