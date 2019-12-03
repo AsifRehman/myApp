@@ -127,6 +127,10 @@ export default {
       }
       else {
         Object.assign(this.mainList[this.editedIndex], this.editedItem)
+        axios.put(this.url + "(" + item.MHeadID + ")"  , this.editedItem).then(function(response) {
+          vm.Status = response.config.data;
+          //vm.mainList.push(JSON.parse(response.config.data));
+        });
         // this.editedIndex = this.mainList.indexOf(item)
         // this.mainList = Object.assign({}, item)
          this.dialog = false
