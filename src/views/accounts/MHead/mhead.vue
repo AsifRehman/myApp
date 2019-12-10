@@ -87,10 +87,13 @@ export default {
     initialize() {
       this.url = this.$store.state.url + "tbl_MHead";
       var vm = this;
+      vm.Status = 'initialize';
       axios
         .get(this.url)
         .then(function(response) {
-          vm.mainList = response.data.value;
+         //v.mainList = response.data.value;
+          vm.Status = response.data;
+          vm.mainList = response.data;
           vm.loading = false;
         })
         .catch(function(error) {
@@ -127,8 +130,9 @@ export default {
       }
       else {
         Object.assign(this.mainList[this.editedIndex], this.editedItem)
-        axios.put(this.url + "(" + item.MHeadID + ")"  , this.editedItem).then(function(response) {
-          vm.Status = response.config.data;
+        //axios.put(this.url + "(" + item.MHeadID + ")"  , this.editedItem).then(function(response) {
+        axios.put(this.url + "/" + item.MHeadID, this.editedItem).then(function(response) {
+          vm.Status = response.data;
           //vm.mainList.push(JSON.parse(response.config.data));
         });
         // this.editedIndex = this.mainList.indexOf(item)
@@ -142,7 +146,7 @@ export default {
       const index = vm.mainList.indexOf(item);
       this.mainList.splice(index, 1);
       axios
-        .delete(this.url + "(" + item.MHeadID + ")")
+        .delete(this.url + "/" + item.MHeadID )
         .then(function(response) {
           vm.Status = response;
         })
