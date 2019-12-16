@@ -22,7 +22,29 @@
         <v-btn color="success" @click="showDialog2">Button 1</v-btn>
       </v-dialog>
     </v-dialog>
-    <v-btn color="info" @click="showDialog">Dialog</v-btn>
+    <v-data-table
+      :headers="headers"
+      :items="items"
+      hide-actions
+      class="elevation-1"
+      item-key="name"
+    >
+      <template slot="items" slot-scope="props">
+        <tr @click="props.expanded = !props.expanded">
+          <td>{{ props.item.key }}</td>
+          <td class="text-xs-right">{{ props.item.key }}</td>
+          <td class="text-xs-right">{{ props.item.key }}</td>
+          <td class="text-xs-right">{{ props.item.key }}</td>
+          <td class="text-xs-right">{{ props.item.key }}</td>
+          <td class="text-xs-right">{{ props.item.key }}</td>
+        </tr>
+      </template>
+      <template slot="expand" slot-scope="props">
+        <v-card flat>
+          <v-card-text>text</v-card-text>
+        </v-card>
+      </template>
+    </v-data-table>
   </div>
 </template>
 
