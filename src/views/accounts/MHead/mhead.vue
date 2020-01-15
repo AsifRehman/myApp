@@ -36,7 +36,7 @@
     </v-dialog>
 
     <!-- List -->
-    <v-data-table :headers="headers" :items="mainList" hide-actions class="elevation-1">
+    <v-data-table :headers="headers" :items="mainList" hide-actions class="elevation-1" dense>
       <template slot="items" slot-scope="props">
         <td>{{ props.item.MHeadID }}</td>
         <td class="text-xs-centre">{{ props.item.MHead }}</td>
@@ -127,7 +127,7 @@ export default {
       }
       else {
         Object.assign(this.mainList[this.editedIndex], this.editedItem)
-        axios.put(this.url + "(" + item.MHeadID + ")"  , this.editedItem).then(function(response) {
+        axios.put(this.url + "(" + item.MHeadID + ")", this.editedItem).then(function(response) {
           vm.Status = response.config.data;
           //vm.mainList.push(JSON.parse(response.config.data));
         });

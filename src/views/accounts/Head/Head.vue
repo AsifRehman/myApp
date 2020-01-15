@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div>{{ Status }}</div>
-    <v-chip label color="deep-purple" text-color="primary">
-      <v-icon left>delete</v-icon> {{searchID}}
-    </v-chip>
     <v-autocomplete
       v-model="searchID"
       :items="items"
