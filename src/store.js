@@ -6,8 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     //url: 'https://brtapi.azurewebsites.net/odata/'
-    url: 'http://www.brt.somee.com/odata/'
-    //url: 'https://localhost:44396/odata/'
+    //url: 'http://www.brt.somee.com/odata/'
+    url: 'http://localhost/odata/'
   },
   mutations: {
 
