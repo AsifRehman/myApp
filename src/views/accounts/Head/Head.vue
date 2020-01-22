@@ -28,13 +28,9 @@
 
         <v-card-text>
           <!-- New Entry -->
-          <v-text-field
-            v-model="editedItem.MHeadID"
-            ref="MHeadID"
-            label="MHead ID"
-            @keyup.enter="this.$refs.MHead.focus()"
-          ></v-text-field>
-          <v-text-field v-model="editedItem.MHead" ref="MHead" label="MHead"></v-text-field>
+          <v-text-field v-model="editedItem.HeadID" ref="HeadID" label="Head ID" @keyup.enter="this.$refs.Head.focus()"></v-text-field>
+          <v-text-field v-model="editedItem.Head" ref="Head" label="Head" @keyup.enter="this.$refs.MHeadID.focus()"></v-text-field>
+          <v-text-field v-model="editedItem.MHeadID" ref="MHeadID" label="MHead ID" @keyup.enter="this.$refs.HeadID.focus()"></v-text-field>
           <!-- End New Entry -->
         </v-card-text>
 
@@ -130,13 +126,26 @@ export default {
           vm.Status = response;
         });
     },
+      editItem(item) {
+      this.editedIndex = this.mainList.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    Reset() {
+      this.editedItem.HeadID = null;
+      this.editedItem.Head = "";
+      this.editedItem.MHeadID = null;
+    },
+    ShowForm() {
+      this.dialog = true;
+    },
     Add() {
       //debugger
       var vm = this;
       var item = { ...this.editedItem };
       if (this.editedIndex < 0) {
         this.Reset();
-        vm.$refs.MHeadID.focus();
+        vm.$refs.HeadID.focus();
 
         axios.post(this.url, item).then(function(response) {
           vm.Status = response.config.data;
@@ -145,7 +154,7 @@ export default {
       } else {
         Object.assign(this.mainList[this.editedIndex], this.editedItem);
         axios
-          .put(this.url + "(" + item.MHeadID + ")", this.editedItem)
+          .put(this.url + "(" + item.HeadID + ")", this.editedItem)
           .then(function(response) {
             vm.Status = response.config.data;
             //vm.mainList.push(JSON.parse(response.config.data));
